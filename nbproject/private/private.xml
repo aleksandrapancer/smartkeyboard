@@ -3,8 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Alex_2/Desktop/smartkeyboard/src/smartkeyboard/Smartkeyboard.java</file>
-            <file>file:/C:/Users/Alex_2/Desktop/smartkeyboard/src/smartkeyboard/VirtualKeyboard.java</file>
+            <file>file:/C:/Users/Kamila/Documents/GitKraken/smartkeyboard/src/lc/kra/system/keyboard/event/GlobalKeyEvent.java</file>
+            <file>file:/C:/Users/Kamila/Documents/GitKraken/smartkeyboard/src/lc/kra/system/keyboard/GlobalKeyboardHook.java</file>
+            <file>file:/C:/Users/Kamila/Documents/GitKraken/smartkeyboard/src/lc/kra/system/keyboard/event/GlobalKeyListener.java</file>
+            <file>file:/C:/Users/Kamila/Documents/GitKraken/smartkeyboard/src/lc/kra/system/keyboard/event/GlobalKeyAdapter.java</file>
+            <file>file:/C:/Users/Kamila/Documents/GitKraken/smartkeyboard/src/lc/kra/system/keyboard/example/GlobalKeyboardExample.java</file>
         </group>
     </open-files>
 </project-private>

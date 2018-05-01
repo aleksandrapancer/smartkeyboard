@@ -17,37 +17,67 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.PolygonBuilder;
+
 
 public class VirtualKeyboard {
-  private final VBox root ;
- 
-  public VirtualKeyboard(ReadOnlyObjectProperty<Node> target) {
-    this.root = new VBox(5);
-    root.setPadding(new Insets(10));
-    root.getStyleClass().add("virtual-keyboard");
+   private final VBox root ;
 
-    final Modifiers modifiers = new Modifiers();
-
-    // Data for regular buttons; split into rows
-    final String[][] unshifted = new String[][] {
+  //default keyboard  
+  final String[][] unshifted1 = new String[][] {
         { "`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=" },
         { "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\" },
         { "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'" },
         { "z", "x", "c", "v", "b", "n", "m", ",", ".", "/" } };
 
-    final String[][] shifted = new String[][] {
+  final String[][] shifted1 = new String[][] {
         { "~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+" },
         { "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "{", "}", "|" },
         { "A", "S", "D", "F", "G", "H", "J", "K", "L", ":", "\"" },
         { "Z", "X", "C", "V", "B", "N", "M", "<", ">", "?" } };
+  
+  
+    final String[][] unshifted_custom = new String[][] {
+        { "`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=" },
+        { "a", "b", "c", "d", "e", "y", "u", "i", "o", "p", "[", "]", "\\" },
+        { "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'" },
+        { "z", "x", "c", "v", "b", "n", "m", ",", ".", "/" } };
+    
+    final String[][] shifted_custom = new String[][] {
+        { "~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+" },
+        { "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "{", "}", "|" },
+        { "A", "S", "D", "F", "G", "H", "J", "K", "L", ":", "\"" },
+        { "Z", "X", "C", "V", "B", "N", "M", "<", ">", "?" } };
+  
+    
+  public VirtualKeyboard(ReadOnlyObjectProperty<Node> target, int type) {
+    this.root = new VBox(5);
+    root.setPadding(new Insets(10));
+    root.getStyleClass().add("virtual-keyboard");
+
+    final Modifiers modifiers = new Modifiers();
+    String[][] unshifted = null; 
+    String[][] shifted = null;
+    
+    
+    switch(type){
+            case 1: {
+                unshifted = unshifted1; 
+                shifted = shifted1; 
+                break; 
+            }
+            case 2: {
+                unshifted = unshifted_custom; 
+                shifted = shifted_custom; 
+                break; 
+            }            
+     
+    }  
 
     final KeyCode[][] codes = new KeyCode[][] {
         { KeyCode.BACK_QUOTE, KeyCode.DIGIT1, KeyCode.DIGIT2, KeyCode.DIGIT3,
@@ -89,22 +119,16 @@ public class VirtualKeyboard {
     final Button spaceBar = createNonshiftableButton(" ", KeyCode.SPACE, modifiers, target);
     spaceBar.setMaxWidth(Double.POSITIVE_INFINITY);
     HBox.setHgrow(spaceBar, Priority.ALWAYS);
-
-  
   }
   
-  /**
-   * Creates a VirtualKeyboard which uses the focusProperty of the scene to which it is attached as its target
-   */
-  public VirtualKeyboard() {
+/*  public VirtualKeyboard() {
     this(null);
   }
-  
-  /**
-   * Visual component displaying this keyboard. The returned node has a style class of "virtual-keyboard".
-   * Buttons in the view have a style class of "virtual-keyboard-button".
-   * @return a view of the keyboard.
-   */
+  */
+  public VirtualKeyboard(int type) {
+    this(null, type);
+  }
+     
   public Node view() {
     return root ;
   }
@@ -138,11 +162,7 @@ public class VirtualKeyboard {
     button.textProperty().bind(text);
     button.setStyle("-fx-font: 24 arial;");
   
-        
-    // Important not to grab the focus from the target:
-    button.setFocusTraversable(false);
-    
-    // Add a style class for css:
+       
     button.getStyleClass().add("virtual-keyboard-button");
     
     button.setOnAction(new EventHandler<ActionEvent>() {
@@ -178,7 +198,6 @@ public class VirtualKeyboard {
     return button;
   }
 
-  // Utility method to create a KeyEvent from the Modifiers
   private KeyEvent createKeyEvent(Object source, EventTarget target,
       EventType<KeyEvent> eventType, String character, KeyCode code,
       Modifiers modifiers) {

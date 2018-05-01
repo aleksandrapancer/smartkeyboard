@@ -26,6 +26,8 @@ import java.awt.Robot;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jdk.nashorn.internal.ir.BreakNode;
+import keyboard.KeyboardPatterns;
 
 import lc.kra.system.keyboard.GlobalKeyboardHook;
 import lc.kra.system.keyboard.event.GlobalKeyAdapter;
@@ -33,10 +35,13 @@ import lc.kra.system.keyboard.event.GlobalKeyEvent;
 
 public class GlobalKeyboardExample {
 	private static boolean run = true;
+        static int helpValue;
 	public static void main(String[] args) {
 		// might throw a UnsatisfiedLinkError if the native library fails to load or a RuntimeException if hooking fails 
 		GlobalKeyboardHook keyboardHook = new GlobalKeyboardHook(true); // use false here to switch to hook instead of raw input
-
+                KeyboardPatterns keyboardPatterns = new KeyboardPatterns();
+                helpValue = 0;
+                
 		System.out.println("Global keyboard hook successfully started, press [escape] key to shutdown. Connected keyboards:");
 		for(Entry<Long,String> keyboard:GlobalKeyboardHook.listKeyboards().entrySet())
 			System.out.format("%d: %s\n", keyboard.getKey(), keyboard.getValue());
@@ -44,13 +49,25 @@ public class GlobalKeyboardExample {
 		keyboardHook.addKeyListener(new GlobalKeyAdapter() {
 			@Override public void keyPressed(GlobalKeyEvent event) {
                             try {
-                                System.out.println(event);
-                                if(event.getVirtualKeyCode()==GlobalKeyEvent.VK_A){
-                                Robot r = new Robot();
-                                r.delay(3000);
-                                r.keyPress(GlobalKeyEvent.VK_BACK);
-                                r.keyPress(GlobalKeyEvent.VK_B);
+                                System.out.println(event);                               
+                                Robot robot = new Robot();
+                                
+                                if(helpValue == 0){
+                                for (int i = 0; i < KeyboardPatterns.keyTab.length; i++) {
+                                    if(event.getVirtualKeyCode()==KeyboardPatterns.keyTab[i]){
+                                        robot.keyPress(GlobalKeyEvent.VK_BACK);
+                                        //r.delay(100);
+                                        robot.keyPress(KeyboardPatterns.mapTab[i]);
+                                        helpValue++;
+                                        break;
+                                    }
                                 }
+                                }else if(helpValue == 2){
+                                    helpValue=0;
+                                }else{
+                                    helpValue++;
+                                }
+                                
                             } catch (AWTException ex) {
                                 Logger.getLogger(GlobalKeyboardExample.class.getName()).log(Level.SEVERE, null, ex);
                             }

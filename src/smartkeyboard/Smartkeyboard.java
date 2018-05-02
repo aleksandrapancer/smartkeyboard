@@ -22,15 +22,14 @@ public class Smartkeyboard extends Application {
     root.setPadding(new Insets(10));
     Scene scene = new Scene(root);  
       
-   
-    final TextArea textArea = new TextArea();
+  
     final Button defaultButton = new Button("Domyślny układ QWERTY");
     defaultButton.setDefaultButton(true);
     defaultButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
         System.out.println("Domyślny układ klawiatury QWERTY");
-        root.getChildren().remove(2);         
+        root.getChildren().remove(1);         
         VirtualKeyboard vkb = new VirtualKeyboard(1);
         vkb.view().setStyle("-fx-border-color: darkblue; -fx-border-radius: 5;");
 
@@ -45,7 +44,7 @@ public class Smartkeyboard extends Application {
       public void handle(ActionEvent event) {
         System.out.println("Spersonalizowany układ klawiatury");
         
-        root.getChildren().remove(2);         
+        root.getChildren().remove(1);         
         VirtualKeyboard vkb = new VirtualKeyboard(2);
         vkb.view().setStyle("-fx-border-color: darkblue; -fx-border-radius: 5;");
 
@@ -53,16 +52,14 @@ public class Smartkeyboard extends Application {
       }
     });
     
-    final CheckBox editModeCheckBox = new CheckBox("EDIT MODE ACTIVE");
-    
     final HBox buttons = new HBox(5);
-    buttons.getChildren().addAll(defaultButton, customButton, editModeCheckBox);
+    buttons.getChildren().addAll(defaultButton, customButton);
     buttons.setAlignment(Pos.CENTER);
    
     VirtualKeyboard vkb = new VirtualKeyboard(1);
     vkb.view().setStyle("-fx-border-color: darkblue; -fx-border-radius: 5;");
 
-    root.getChildren().addAll(textArea, buttons, vkb.view());
+    root.getChildren().addAll(buttons, vkb.view());
 
     primaryStage.setScene(scene);
     primaryStage.show();

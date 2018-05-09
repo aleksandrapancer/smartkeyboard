@@ -74,6 +74,7 @@ public class GlobalKeyboardHook {
 			} catch(InterruptedException e) { /* thread got interrupted, break */ }
 		}
 	};
+    private Map<Character, String> charMap;
 
 	/**
 	 * Instantiate a new GlobalKeyboardHook.
@@ -178,6 +179,15 @@ public class GlobalKeyboardHook {
 		LibraryLoader.loadLibrary(); // load the library, in case it's not already loaded
 		return NativeKeyboardHook.listDevices();
 	}
+
+    public void setCharMap(Map<Character, String> charMap) {
+            this.charMap = charMap;
+        }
+    
+    public Map<Character, String> getCharMap()
+    {
+        return charMap;
+    }
 	
 	private static abstract class NativeKeyboardHook extends Thread {
 		private int status;

@@ -12,12 +12,17 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import lc.kra.system.keyboard.GlobalKeyboardHook;
+import lc.kra.system.keyboard.example.GlobalKeyboardExample;
 
 public class Smartkeyboard extends Application {
 
+    GlobalKeyboardHook keyboardHook;
   @Override
   public void start(Stage primaryStage) {
     
+      
+    keyboardHook = GlobalKeyboardExample.runHook();
     final VBox root = new VBox(5);
     root.setPadding(new Insets(10));
     Scene scene = new Scene(root);  
@@ -34,6 +39,7 @@ public class Smartkeyboard extends Application {
         vkb.view().setStyle("-fx-border-color: darkblue; -fx-border-radius: 5;");
 
         root.getChildren().add(vkb.view()); 
+        keyboardHook.setCharMap(vkb.charMap);
       }
     });
     
@@ -49,6 +55,7 @@ public class Smartkeyboard extends Application {
         vkb.view().setStyle("-fx-border-color: darkblue; -fx-border-radius: 5;");
 
         root.getChildren().add(vkb.view()); 
+        keyboardHook.setCharMap(vkb.charMap);
       }
     });
     
@@ -58,6 +65,7 @@ public class Smartkeyboard extends Application {
    
     VirtualKeyboard vkb = new VirtualKeyboard(1);
     vkb.view().setStyle("-fx-border-color: darkblue; -fx-border-radius: 5;");
+    keyboardHook.setCharMap(vkb.charMap);
 
     root.getChildren().addAll(buttons, vkb.view());
 

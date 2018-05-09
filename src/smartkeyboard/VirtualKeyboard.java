@@ -1,5 +1,8 @@
 package smartkeyboard;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringBinding;
 import javafx.beans.property.BooleanProperty;
@@ -27,32 +30,34 @@ import javafx.scene.layout.VBox;
 
 public class VirtualKeyboard {
    private final VBox root ;
+   public Map<Character,String> charMap;
 
   //default keyboard  
   final String[][] unshifted1 = new String[][] {
-        { "`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=" },
+        { "~", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=" },
         { "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\" },
         { "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'" },
         { "z", "x", "c", "v", "b", "n", "m", ",", ".", "/" } };
 
   final String[][] shifted1 = new String[][] {
-        { "~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+" },
+        //{ "~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+" },
+        { "~", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=" },
         { "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "{", "}", "|" },
         { "A", "S", "D", "F", "G", "H", "J", "K", "L", ":", "\"" },
         { "Z", "X", "C", "V", "B", "N", "M", "<", ">", "?" } };
   
   
     final String[][] unshifted_custom = new String[][] {
-        { "`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=" },
-        { "a", "b", "c", "d", "e", "y", "u", "i", "o", "p", "[", "]", "\\" },
-        { "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'" },
-        { "z", "x", "c", "v", "b", "n", "m", ",", ".", "/" } };
+        { "Esc", "Esc", "a", "ą", "b", "c", "ch", "ć", "cz", "d", "dz", "dź", "dż"},
+        { "e", "ę", "f", "g", "h", "i", "j", "k", "l", "ł", "m", "n", "ń" },
+        { "o", "ó", "p", "r", "rz", "s", "ś", "sz", "t", "u", "w" },
+        { "y", "z", "ź", "ż", "v", "!", "?", ",", ".", "/" } };
     
     final String[][] shifted_custom = new String[][] {
-        { "~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+" },
-        { "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "{", "}", "|" },
-        { "A", "S", "D", "F", "G", "H", "J", "K", "L", ":", "\"" },
-        { "Z", "X", "C", "V", "B", "N", "M", "<", ">", "?" } };
+        { "Esc", "Esc", "A", "Ą", "B", "C", "CH", "Ć", "CZ", "D", "DZ", "DŹ", "DŻ" },
+        { "E", "Ę", "F", "G", "H", "I", "J", "K", "L", "Ł", "M", "N", "Ń" },
+        { "O", "Ó", "P", "R", "RZ", "S", "Ś", "SZ", "T", "U", "W" },
+        { "Y", "Z", "Ź", "Ź", "V", "!", "?", ",", ".", "/" } };
   
     
   public VirtualKeyboard(ReadOnlyObjectProperty<Node> target, int type) {
@@ -76,8 +81,31 @@ public class VirtualKeyboard {
                 shifted = shifted_custom; 
                 break; 
             }            
-     
     }  
+    
+    ArrayList<Character> keyboardKeys = new ArrayList<>();
+    ArrayList<String> keyboardVals = new ArrayList<>();
+    charMap = new LinkedHashMap<>(); 
+    
+    for(String[] s: shifted1)
+     {
+         for(String letter: s)
+         {
+             keyboardKeys.add(letter.charAt(0));
+         }
+     }
+    
+     for(String[] s: shifted)
+     {
+         for(String letter: s)
+         {
+             keyboardVals.add(letter);
+         }
+     }
+     
+    for (int i=0; i<keyboardVals.size(); i++) {
+      charMap.put(keyboardKeys.get(i), keyboardVals.get(i));
+    }
 
     final KeyCode[][] codes = new KeyCode[][] {
         { KeyCode.BACK_QUOTE, KeyCode.DIGIT1, KeyCode.DIGIT2, KeyCode.DIGIT3,

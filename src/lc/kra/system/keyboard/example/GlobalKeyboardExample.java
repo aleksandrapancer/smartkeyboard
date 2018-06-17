@@ -83,29 +83,22 @@ public class GlobalKeyboardExample {
                             for (int i = 0; i < mappedKeys.length(); i++){
                                 char c = mappedKeys.charAt(i);
                                 
-                                if(
-                                        c == '!' ||
-                                        c == '?' ||
-                                        c == 'Ą' ||
-                                        c == 'Ę' ||
-                                        c == 'Ó' ||
-                                        c == 'Ć' ||
-                                        c == 'Ś' ||
-                                        c == 'Ź' ||
-                                        c == 'Ż')
-                                {
                                     switch(c){
                                         case '!' :
                                             robot.keyPress(KeyEvent.VK_SHIFT);
                                             robot.keyPress(KeyEvent.VK_1);
                                             robot.keyRelease(KeyEvent.VK_1);
                                             robot.keyRelease(KeyEvent.VK_SHIFT);
+                                            helpValue++;
+                                            helpValue++;
                                             break;
                                         case '?' :
                                             robot.keyPress(KeyEvent.VK_SHIFT);
                                             robot.keyPress(KeyEvent.VK_SLASH);
                                             robot.keyRelease(KeyEvent.VK_SLASH);
                                             robot.keyRelease(KeyEvent.VK_SHIFT);
+                                            helpValue++;
+                                            helpValue++;
                                             break;
                                         case 'Ę':
                                             //robot.keyPress(KeyEvent.VK_ALT_GRAPH);
@@ -113,27 +106,24 @@ public class GlobalKeyboardExample {
                                             //robot.keyRelease(KeyEvent.VK_E);
                                             //robot.keyRelease(KeyEvent.VK_ALT_GRAPH);
                                             robot.keyPress(KeyEvent.VK_E);
+                                            helpValue++;
+                                            helpValue++;
                                             break;
                                         case 'Ą':
-                                            robot.keyPress(KeyEvent.VK_A);
+                                            robot.keyPress(KeyEvent.VK_ALT_GRAPH);
+                                            //robot.keyPress(KeyEvent.VK_A);
+                                            //
+                                            robot.keyRelease(KeyEvent.VK_A);
+                                            robot.keyRelease(KeyEvent.VK_ALT_GRAPH);
+                                            helpValue++;
+                                            helpValue++;
                                             break;
                                         default:
-                                            robot.keyPress(KeyEvent.VK_X);
-                                            break;
+                                            robot.keyPress(c);
+                                            robot.keyRelease(c);
+                                            helpValue++;
                                     }
-                                    
-                                    helpValue++;
-                                    helpValue++;
-                                    break;
-                                }
-                                else
-                                {
-                                        robot.keyPress(c);
-                                        robot.keyRelease(c);
-                                        helpValue++;
-                                        
-                                        }
-                                
+   
                             }
                             
                             helpValue++;

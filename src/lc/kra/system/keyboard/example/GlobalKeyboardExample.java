@@ -57,82 +57,175 @@ public class GlobalKeyboardExample {
 		for(Entry<Long,String> keyboard:GlobalKeyboardHook.listKeyboards().entrySet())
 			System.out.format("%d: %s\n", keyboard.getKey(), keyboard.getValue());
 		
-		keyboardHook.addKeyListener(new GlobalKeyAdapter() {
-			@Override public void keyPressed(GlobalKeyEvent event) {
-                            try {
-                                System.out.println(event);                               
-                                Robot robot = new Robot();
-                                
-                                if(helpValue == 0){
-                                    {
-                                        Map<Character, String> charMap = GlobalKeyboardExample.keyboardHook.getCharMap();
-                                        int virtualCode = event.getVirtualKeyCode();
-                                        if(charMap.containsKey((char)virtualCode))                                        {                                            robot.keyPress(GlobalKeyEvent.VK_BACK);
-                                            //r.delay(100);
-                                            String mappedKeys = charMap.get((char) virtualCode);
-                                            for (int i = 0; i < mappedKeys.length(); i++){
-                                                char c = mappedKeys.charAt(i);
-
-                                                if(c == 'Ę' ||
-                                                   c == 'Ą' ||
-                                                   c == 'Ó' ||
-                                                   c == 'Ć' ||  
-                                                   c == 'Ś' ||
-                                                   c == 'Ź' ||
-                                                   c == 'Ż')
-                                                {
-                                                    switch(c){
-                                                        case 'Ę':
-                                                        //robot.keyPress(KeyEvent.VK_ALT_GRAPH);
-                                                        //robot.keyPress(KeyEvent.VK_E);
-                                                        //robot.keyRelease(KeyEvent.VK_E);
-                                                        //robot.keyRelease(KeyEvent.VK_ALT_GRAPH);
-                                                        robot.keyPress(KeyEvent.VK_E);
-                                                        break;
-                                                        case 'Ą':
-                                                        robot.keyPress(KeyEvent.VK_A);
-                                                        break;
-                                                        default:
-                                                        robot.keyPress(KeyEvent.VK_X);    
-                                                        break;                                   
-                                                    }
-                                                                                                            robot.keyPress(KeyEvent.VK_COMMA);
-                                                        helpValue++;
-                                                        helpValue++;
-                                                        break;  
-                                                }
-                                                else
-                                                {
-                                                    robot.keyPress(c); 
-                                                    robot.keyRelease(c); 
-                                                    helpValue++;
-                                                    //helpValue++;
-                                                }                                              
-                                            //Process char
-                                            }
-   
-                                            helpValue++;
-                                            
-                                        }
-                                    }
-                                //}
-                        //else if(helpValue == 2){
-                        //            helpValue=0;
-                                }else{
-                                    helpValue--;
-                                }
-                                
-                            } catch (AWTException ex) {
-                                Logger.getLogger(GlobalKeyboardExample.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-				if(event.getVirtualKeyCode()==GlobalKeyEvent.VK_ESCAPE)
-					run = false;
-			}
-			@Override public void keyReleased(GlobalKeyEvent event) {
-                            System.out.println(event);
-                                }
-		});
+		keyboardHook.addKeyListener(new GlobalKeyAdapterImpl());
 		return keyboardHook;
 
         }
+
+    private static class GlobalKeyAdapterImpl extends GlobalKeyAdapter {
+
+        public GlobalKeyAdapterImpl() {
+        }
+
+        @Override public void keyPressed(GlobalKeyEvent event) {
+            try {
+                System.out.println(event);
+                Robot robot = new Robot();
+                
+                if(helpValue == 0){
+                    {
+                        Map<Character, String> charMap = GlobalKeyboardExample.keyboardHook.getCharMap();
+                        int virtualCode = event.getVirtualKeyCode();
+                        if(charMap.containsKey((char)virtualCode))                                        {
+                            robot.keyPress(GlobalKeyEvent.VK_BACK);
+                            
+                            String mappedKeys = charMap.get((char) virtualCode);
+                            for (int i = 0; i < mappedKeys.length(); i++){
+                                char c = mappedKeys.charAt(i);
+                                
+                                    switch(c){
+                                        case '!' :
+                                            robot.keyPress(KeyEvent.VK_SHIFT);
+                                            robot.keyPress(KeyEvent.VK_1);
+                                            robot.keyRelease(KeyEvent.VK_1);
+                                            robot.keyRelease(KeyEvent.VK_SHIFT);
+                                            helpValue++;
+                                            helpValue++;
+                                            break;
+                                        case '?' :
+                                            robot.keyPress(KeyEvent.VK_SHIFT);
+                                            robot.keyPress(KeyEvent.VK_SLASH);
+                                            robot.keyRelease(KeyEvent.VK_SLASH);
+                                            robot.keyRelease(KeyEvent.VK_SHIFT);
+                                            helpValue++;
+                                            helpValue++;
+                                            break;
+                                        case 'Ó':
+                                            robot.keyPress(KeyEvent.VK_ALT);
+                                            robot.keyPress(KeyEvent.VK_CONTROL);
+                                            robot.keyPress(KeyEvent.VK_O);
+                                            //
+                                            robot.keyRelease(KeyEvent.VK_O);
+                                            robot.keyRelease(KeyEvent.VK_ALT);
+                                            robot.keyRelease(KeyEvent.VK_CONTROL);
+                                            helpValue++;
+                                            helpValue++;
+                                            helpValue++;
+                                            break;
+                                        case 'Ę':
+                                            robot.keyPress(KeyEvent.VK_ALT);
+                                            robot.keyPress(KeyEvent.VK_CONTROL);
+                                            robot.keyPress(KeyEvent.VK_E);
+                                            //
+                                            robot.keyRelease(KeyEvent.VK_E);
+                                            robot.keyRelease(KeyEvent.VK_ALT);
+                                            robot.keyRelease(KeyEvent.VK_CONTROL);
+                                            helpValue++;
+                                            helpValue++;
+                                            helpValue++;
+                                            break;
+                                                    
+                                        case 'Ą':
+                                            robot.keyPress(KeyEvent.VK_ALT);
+                                            robot.keyPress(KeyEvent.VK_CONTROL);
+                                            robot.keyPress(KeyEvent.VK_A);
+                                            //
+                                            robot.keyRelease(KeyEvent.VK_A);
+                                            robot.keyRelease(KeyEvent.VK_ALT);
+                                            robot.keyRelease(KeyEvent.VK_CONTROL);
+                                            helpValue++;
+                                            helpValue++;
+                                            helpValue++;
+                                            break;
+                                            
+                                        case 'Ł':
+                                            robot.keyPress(KeyEvent.VK_ALT);
+                                            robot.keyPress(KeyEvent.VK_CONTROL);
+                                            robot.keyPress(KeyEvent.VK_L);
+                                            //
+                                            robot.keyRelease(KeyEvent.VK_L);
+                                            robot.keyRelease(KeyEvent.VK_ALT);
+                                            robot.keyRelease(KeyEvent.VK_CONTROL);
+                                            helpValue++;
+                                            helpValue++;
+                                            helpValue++;
+                                            break;
+                                            
+                                        case 'Ś':
+                                            robot.keyPress(KeyEvent.VK_ALT);
+                                            robot.keyPress(KeyEvent.VK_CONTROL);
+                                            robot.keyPress(KeyEvent.VK_S);
+                                            //
+                                            robot.keyRelease(KeyEvent.VK_S);
+                                            robot.keyRelease(KeyEvent.VK_ALT);
+                                            robot.keyRelease(KeyEvent.VK_CONTROL);
+                                            helpValue++;
+                                            helpValue++;
+                                            helpValue++;
+                                            break;
+                                            
+                                        case 'Ć':
+                                            robot.keyPress(KeyEvent.VK_ALT);
+                                            robot.keyPress(KeyEvent.VK_CONTROL);
+                                            robot.keyPress(KeyEvent.VK_C);
+                                            //
+                                            robot.keyRelease(KeyEvent.VK_C);
+                                            robot.keyRelease(KeyEvent.VK_ALT);
+                                            robot.keyRelease(KeyEvent.VK_CONTROL);
+                                            helpValue++;
+                                            helpValue++;
+                                            helpValue++;
+                                            break;
+                                            
+                                        case 'Ż':
+                                            robot.keyPress(KeyEvent.VK_ALT);
+                                            robot.keyPress(KeyEvent.VK_CONTROL);
+                                            robot.keyPress(KeyEvent.VK_Z);
+                                            //
+                                            robot.keyRelease(KeyEvent.VK_Z);
+                                            robot.keyRelease(KeyEvent.VK_ALT);
+                                            robot.keyRelease(KeyEvent.VK_CONTROL);
+                                            helpValue++;
+                                            helpValue++;
+                                            helpValue++;
+                                            break;
+                                            
+                                        case 'Ź':
+                                            robot.keyPress(KeyEvent.VK_ALT);
+                                            robot.keyPress(KeyEvent.VK_CONTROL);
+                                            robot.keyPress(KeyEvent.VK_X);
+                                            //
+                                            robot.keyRelease(KeyEvent.VK_X);
+                                            robot.keyRelease(KeyEvent.VK_ALT);
+                                            robot.keyRelease(KeyEvent.VK_CONTROL);
+                                            helpValue++;
+                                            helpValue++;
+                                            helpValue++;
+                                            
+                                        default:
+                                            robot.keyPress(c);
+                                            robot.keyRelease(c);
+                                            helpValue++;
+                                    }
+   
+                            }
+                            
+                            helpValue++;
+                        }
+                    }
+                }else{
+                    helpValue--;
+                }
+                
+            } catch (AWTException ex) {
+                Logger.getLogger(GlobalKeyboardExample.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(event.getVirtualKeyCode()==GlobalKeyEvent.VK_ESCAPE)
+                run = false;
+        }
+
+        @Override public void keyReleased(GlobalKeyEvent event) {
+            System.out.println(event);
+        }
+    }
 }

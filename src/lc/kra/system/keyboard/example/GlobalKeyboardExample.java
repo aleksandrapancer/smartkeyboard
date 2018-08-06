@@ -24,6 +24,7 @@ package lc.kra.system.keyboard.example;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Level;
@@ -63,8 +64,19 @@ public class GlobalKeyboardExample {
         }
 
     private static class GlobalKeyAdapterImpl extends GlobalKeyAdapter {
-
+        
+        
+        Map<Integer,Integer> map;
+        
         public GlobalKeyAdapterImpl() {
+            this.map = new HashMap<>();
+            map.put(186,58);
+            map.put(187,61);
+            map.put(189,45);
+            map.put(219,123);
+            map.put(220,124);
+            map.put(221,125);
+            map.put(222, 34);
         }
 
         @Override public void keyPressed(GlobalKeyEvent event) {
@@ -76,29 +88,19 @@ public class GlobalKeyboardExample {
                     {                       
                         Map<Character, String> charMap = GlobalKeyboardExample.keyboardHook.getCharMap();
                         int virtualCode = event.getVirtualKeyCode();
+                        int code;
                         
-                        switch(virtualCode){
-                            case 187: virtualCode = 61;
-                                       break;
-                            case 189: virtualCode = 45;
-                                       break;
-                            case 219: virtualCode = 123;
-                                      break;
-                            case 221: virtualCode = 125;
-                                       break;
-                            case 220: virtualCode = 124;
-                                       break;
-                            case 186: virtualCode = 58;
-                                        break;
-                            case 222: virtualCode = 34;
-                                        break;
-                        } 
-                        
-                        if(charMap.containsKey((char)virtualCode))                                       
+                        if(map.containsKey(virtualCode)){
+                            code = map.get(virtualCode);  
+                        }else{
+                            code = virtualCode;
+                        }
+                      
+                        if(charMap.containsKey((char)code))                                       
                         {                           
                             robot.keyPress(GlobalKeyEvent.VK_BACK);
                             
-                            String mappedKeys = charMap.get((char) virtualCode);
+                            String mappedKeys = charMap.get((char) code);
                             for (int i = 0; i < mappedKeys.length(); i++){
                                 char c = mappedKeys.charAt(i);
                                     switch(c){

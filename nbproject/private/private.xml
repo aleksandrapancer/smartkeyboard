@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Joanna/Desktop/smartkeyboard-master/src/lc/kra/system/keyboard/event/GlobalKeyListener.java</file>
-            <file>file:/C:/Users/Joanna/Desktop/smartkeyboard-master/src/smartkeyboard/Smartkeyboard.java</file>
-            <file>file:/C:/Users/Joanna/Desktop/smartkeyboard-master/src/smartkeyboard/VirtualKeyboard.java</file>
-            <file>file:/C:/Users/Joanna/Desktop/smartkeyboard-master/src/lc/kra/system/keyboard/event/GlobalKeyEvent.java</file>
-            <file>file:/C:/Users/Joanna/Desktop/smartkeyboard-master/src/lc/kra/system/keyboard/GlobalKeyboardHook.java</file>
-            <file>file:/C:/Users/Joanna/Desktop/smartkeyboard-master/src/lc/kra/system/keyboard/event/GlobalKeyAdapter.java</file>
-            <file>file:/C:/Users/Joanna/Desktop/smartkeyboard-master/src/lc/kra/system/keyboard/example/GlobalKeyboardExample.java</file>
+            <file>file:/C:/Users/pance/Desktop/smartkeyboard/src/smartkeyboard/Smartkeyboard.java</file>
+            <file>file:/C:/Users/pance/Desktop/smartkeyboard/src/smartkeyboard/VirtualKeyboard.java</file>
+            <file>file:/C:/Users/pance/Desktop/smartkeyboard/src/lc/kra/system/keyboard/example/GlobalKeyboardExample.java</file>
+            <file>file:/C:/Users/pance/Desktop/smartkeyboard/src/lc/kra/system/keyboard/event/GlobalKeyEvent.java</file>
         </group>
     </open-files>
 </project-private>

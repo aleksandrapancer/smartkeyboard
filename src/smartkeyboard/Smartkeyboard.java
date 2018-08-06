@@ -25,7 +25,7 @@ public class Smartkeyboard extends Application {
     keyboardHook = GlobalKeyboardExample.runHook();
     final VBox root = new VBox(5);
     root.setPadding(new Insets(10));
-    Scene scene = new Scene(root);  
+    Scene scene = new Scene(root,1100, 300);  
       
   
     final Button defaultButton = new Button("Domyślny układ QWERTY");

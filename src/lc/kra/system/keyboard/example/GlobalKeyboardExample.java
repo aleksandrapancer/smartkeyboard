@@ -73,16 +73,34 @@ public class GlobalKeyboardExample {
                 Robot robot = new Robot();
                 
                 if(helpValue == 0){
-                    {
+                    {                       
                         Map<Character, String> charMap = GlobalKeyboardExample.keyboardHook.getCharMap();
                         int virtualCode = event.getVirtualKeyCode();
-                        if(charMap.containsKey((char)virtualCode))                                        {
+                        
+                        switch(virtualCode){
+                            case 187: virtualCode = 61;
+                                       break;
+                            case 189: virtualCode = 45;
+                                       break;
+                            case 219: virtualCode = 123;
+                                      break;
+                            case 221: virtualCode = 125;
+                                       break;
+                            case 220: virtualCode = 124;
+                                       break;
+                            case 186: virtualCode = 58;
+                                        break;
+                            case 222: virtualCode = 34;
+                                        break;
+                        } 
+                        
+                        if(charMap.containsKey((char)virtualCode))                                       
+                        {                           
                             robot.keyPress(GlobalKeyEvent.VK_BACK);
                             
                             String mappedKeys = charMap.get((char) virtualCode);
                             for (int i = 0; i < mappedKeys.length(); i++){
                                 char c = mappedKeys.charAt(i);
-                                
                                     switch(c){
                                         case '!' :
                                             robot.keyPress(KeyEvent.VK_SHIFT);
@@ -106,6 +124,18 @@ public class GlobalKeyboardExample {
                                             robot.keyPress(KeyEvent.VK_O);
                                             //
                                             robot.keyRelease(KeyEvent.VK_O);
+                                            robot.keyRelease(KeyEvent.VK_ALT);
+                                            robot.keyRelease(KeyEvent.VK_CONTROL);
+                                            helpValue++;
+                                            helpValue++;
+                                            helpValue++;
+                                            break;
+                                        case 'Ń':
+                                            robot.keyPress(KeyEvent.VK_ALT);
+                                            robot.keyPress(KeyEvent.VK_CONTROL);
+                                            robot.keyPress(KeyEvent.VK_N);
+                                            //
+                                            robot.keyRelease(KeyEvent.VK_N);
                                             robot.keyRelease(KeyEvent.VK_ALT);
                                             robot.keyRelease(KeyEvent.VK_CONTROL);
                                             helpValue++;
@@ -188,8 +218,7 @@ public class GlobalKeyboardExample {
                                             helpValue++;
                                             helpValue++;
                                             helpValue++;
-                                            break;
-                                            
+                                            break; 
                                         case 'Ź':
                                             robot.keyPress(KeyEvent.VK_ALT);
                                             robot.keyPress(KeyEvent.VK_CONTROL);
@@ -201,9 +230,9 @@ public class GlobalKeyboardExample {
                                             helpValue++;
                                             helpValue++;
                                             helpValue++;
-                                            
+                                            break;                                          
                                         default:
-                                            robot.keyPress(c);
+                                           robot.keyPress(c);                                            
                                             robot.keyRelease(c);
                                             helpValue++;
                                     }

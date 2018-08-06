@@ -57,7 +57,7 @@ public class VirtualKeyboard {
         { "Esc", "Esc", "A", "Ą", "B", "C", "CH", "Ć", "CZ", "D", "DZ", "DŹ", "DŻ" },
         { "E", "Ę", "F", "G", "H", "I", "J", "K", "L", "Ł", "M", "N", "Ń" },
         { "O", "Ó", "P", "R", "RZ", "S", "Ś", "SZ", "T", "U", "W" },
-        { "Y", "Z", "Ź", "Ź", "V", "!", "?", ",", ".", "/" } };
+        { "Y", "Z", "Ź", "Ż", "V", "!", "?", ",", ".", "/" } };
   
     
   public VirtualKeyboard(ReadOnlyObjectProperty<Node> target, int type) {
